@@ -1,0 +1,562 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Updates Notes — Fixes & Verification</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap"
+      rel="stylesheet"
+    />
+    <style>
+      html {
+        scroll-behavior: smooth;
+      }
+      body {
+        font-family: Inter, system-ui, -apple-system, Segoe UI, Roboto,
+          "Helvetica Neue", Arial, "Noto Sans", "Apple Color Emoji",
+          "Segoe UI Emoji";
+      }
+      .prose p {
+        margin: 0.25rem 0;
+      }
+      .badge {
+        @apply inline-flex items-center rounded-full text-xs font-medium px-2.5 py-0.5;
+      }
+    </style>
+  </head>
+  <body class="bg-slate-50 text-slate-800">
+    <!-- Header -->
+    <header
+      class="bg-white/80 backdrop-blur sticky top-0 z-40 border-b border-slate-200"
+    >
+      <div
+        class="max-w-6xl mx-auto px-4 py-3 flex items-center justify-between"
+      >
+        <!-- Logo -->
+        <div class="flex items-center gap-2">
+          <div
+            class="h-8 w-8 grid place-content-center rounded bg-blue-600 text-white font-bold"
+          >
+            MF
+          </div>
+          <span class="font-semibold">Match & Fix — Updates Notes</span>
+        </div>
+
+        <!-- Desktop Nav -->
+        <nav class="hidden md:flex gap-4 text-sm">
+          <a href="#fix-1" class="hover:text-blue-600 text-sm font-semibold"
+            >Fix 1: Location Search</a
+          >
+          <a href="#fix-2" class="hover:text-blue-600 text-sm font-semibold"
+            >Fix 2: Auto-detect</a
+          >
+          <a href="#fix-3" class="hover:text-blue-600 text-sm font-semibold"
+            >Fix 3: UI/UX</a
+          >
+          <a href="#fix-4" class="hover:text-blue-600 text-sm font-semibold"
+            >Fix 4: Performance</a
+          >
+          <a href="#security" class="hover:text-blue-600 text-sm font-semibold"
+            >Security</a
+          >
+          <a
+            href="#cross-browser"
+            class="hover:text-blue-600 text-sm font-semibold"
+            >Cross-Browser</a
+          >
+        </nav>
+
+        <!-- Mobile Menu Button -->
+        <button
+          id="mobile-menu-button"
+          class="md:hidden p-2 rounded hover:bg-slate-100 focus:outline-none focus:ring-2 focus:ring-blue-500"
+        >
+          <!-- Hamburger Icon -->
+          <svg
+            id="hamburger-icon"
+            xmlns="http://www.w3.org/2000/svg"
+            class="h-6 w-6"
+            fill="none"
+            viewBox="0 0 24 24"
+            stroke="currentColor"
+          >
+            <path
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              stroke-width="2"
+              d="M4 6h16M4 12h16M4 18h16"
+            />
+          </svg>
+          <!-- Close Icon (hidden initially) -->
+          <svg
+            id="close-icon"
+            xmlns="http://www.w3.org/2000/svg"
+            class="h-6 w-6 hidden"
+            fill="none"
+            viewBox="0 0 24 24"
+            stroke="currentColor"
+          >
+            <path
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              stroke-width="2"
+              d="M6 18L18 6M6 6l12 12"
+            />
+          </svg>
+        </button>
+      </div>
+
+      <!-- Mobile Menu (hidden by default) -->
+      <div
+        id="mobile-menu"
+        class="hidden flex-col space-y-2 px-4 pb-4 pt-3 bg-white border-t border-slate-200 md:hidden"
+      >
+        <a href="#fix-1" class="block hover:text-blue-600"
+          >Fix 1: Location Search</a
+        >
+        <a href="#fix-2" class="block hover:text-blue-600"
+          >Fix 2: Auto-detect</a
+        >
+        <a href="#fix-3" class="block hover:text-blue-600">Fix 3: UI/UX</a>
+        <a href="#fix-4" class="block hover:text-blue-600"
+          >Fix 4: Performance</a
+        >
+        <a href="#security" class="block hover:text-blue-600">Security</a>
+        <a href="#cross-browser" class="block hover:text-blue-600"
+          >Cross-Browser</a
+        >
+      </div>
+    </header>
+
+    <script>
+      const mobileMenuButton = document.getElementById("mobile-menu-button");
+      const mobileMenu = document.getElementById("mobile-menu");
+      const hamburgerIcon = document.getElementById("hamburger-icon");
+      const closeIcon = document.getElementById("close-icon");
+
+      mobileMenuButton.addEventListener("click", () => {
+        mobileMenu.classList.toggle("hidden");
+        hamburgerIcon.classList.toggle("hidden");
+        closeIcon.classList.toggle("hidden");
+      });
+    </script>
+
+    <!-- Hero -->
+    <section class="bg-gradient-to-b from-white to-slate-100 mb-10">
+      <div class="max-w-6xl mx-auto px-4 py-12">
+        <div
+          class="flex items-start md:items-center justify-between gap-6 flex-col md:flex-row"
+        >
+          <div>
+            <p class="text-sm text-slate-500 uppercase tracking-widest">
+              Milestone Review
+            </p>
+            <h1 class="text-3xl md:text-4xl font-extrabold mt-1">
+              What’s Fixed & How It Was Verified
+            </h1>
+            <p class="mt-3 text-slate-600 max-w-2xl">
+              A quick walk-through of the issues raised by Ahmed, the changes I
+              implemented, and how each fix was verified.
+            </p>
+            <div class="mt-4 flex flex-wrap gap-2">
+              <span
+                class="badge bg-emerald-100 text-emerald-700 p-1.5 rounded-md text-sm"
+                >4 fixes</span
+              >
+              <span
+                class="badge bg-blue-100 text-blue-700 p-1.5 rounded-md text-sm inline-block"
+                >Security verified</span
+              >
+              <span
+                class="badge bg-amber-100 text-amber-700 p-1.5 rounded-md text-sm"
+                >Safari checked</span
+              >
+            </div>
+          </div>
+          <a
+            href="#fix-1"
+            class="shrink-0 inline-flex items-center gap-2 rounded-lg bg-blue-600 text-white px-4 py-2 hover:bg-blue-700"
+          >
+            Start Walk-through
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              class="h-4 w-4"
+              fill="none"
+              viewBox="0 0 24 24"
+              stroke="currentColor"
+            >
+              <path
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                stroke-width="2"
+                d="M13 7l5 5m0 0l-5 5m5-5H6"
+              />
+            </svg>
+          </a>
+        </div>
+      </div>
+    </section>
+
+    <!-- Content -->
+    <main class="max-w-6xl mx-auto px-4 pb-24 space-y-10">
+      <!-- FIX 1 -->
+      <section id="fix-1" class="scroll-mt-24">
+        <div class="bg-white rounded-xl shadow-sm border border-slate-200">
+          <div
+            class="p-5 border-b border-slate-200 flex items-center justify-between"
+          >
+            <h2 class="text-xl font-bold">
+              📍 Fix 1 — Location Search (Google Places API)
+            </h2>
+            <span
+              class="badge bg-emerald-100 text-emerald-700 p-1.5 rounded-md text-sm"
+              >Fixed 1 issue</span
+            >
+          </div>
+          <div class="p-5 grid md:grid-cols-2 gap-6">
+            <div class="prose">
+              <h3 class="font-semibold">Issue Reported by Ahmed</h3>
+              <ul class="list-disc ml-5 text-slate-700">
+                <li>
+                  After entering <em>1600 Amphitheatre…</em> then deleting,
+                  typing gibberish kept <strong>Get 3 Leads</strong> enabled.
+                </li>
+                <li>
+                  Clicking the button searched the previous valid address.
+                </li>
+                <li>
+                  Expected: show an error for nonsense text and block the API
+                  call.
+                </li>
+              </ul>
+              <h3 class="mt-4 font-semibold">Fix Implemented</h3>
+              <ul class="list-disc ml-5">
+                <li>
+                  <strong>Real-time validation:</strong> Inline error “Please
+                  enter a valid address or postcode.”
+                </li>
+                <li>
+                  <strong>Button state:</strong> Disabled for empty/invalid
+                  input; enabled only after a valid selection.
+                </li>
+                <li>
+                  <strong>UI/UX:</strong> Clearing the field removes stale
+                  selection; no API calls for invalid input.
+                </li>
+              </ul>
+            </div>
+            <div class="prose">
+              <h3 class="font-semibold">Test Verification</h3>
+              <ul class="list-disc ml-5">
+                <li>Gibberish → error message + disabled button.</li>
+                <li>Partial address → suggestions appear.</li>
+                <li>Clearing field → state reset + disabled button.</li>
+                <li>
+                  Valid address → button re-enabled, correct search fired.
+                </li>
+              </ul>
+              <div class="mt-4 p-3 rounded-lg bg-slate-50 text-sm">
+                <span class="font-medium">Alt version (summary):</span>
+                Real-time error, strict button gating, state reset, dynamic
+                suggestions.
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- FIX 2 -->
+      <section id="fix-2" class="scroll-mt-24">
+        <div class="bg-white rounded-xl shadow-sm border border-slate-200">
+          <div
+            class="p-5 border-b border-slate-200 flex items-center justify-between"
+          >
+            <h2 class="text-xl font-bold">
+              📍 Fix 2 — Reverse Geocoding (Auto-Detect)
+            </h2>
+            <span
+              class="badge bg-emerald-100 text-emerald-700 p-1.5 rounded-md text-sm"
+              >Fixed 2 issues</span
+            >
+          </div>
+          <div class="p-5 grid md:grid-cols-2 gap-6">
+            <div class="prose">
+              <h3 class="font-semibold">Issues Reported</h3>
+              <ul class="list-disc ml-5">
+                <li>Incomplete addresses (no house/flat).</li>
+                <li>
+                  “User denied Geolocation” stuck on screen; Auto-detect
+                  unresponsive.
+                </li>
+              </ul>
+              <h3 class="mt-4 font-semibold">What I Changed</h3>
+              <ul class="list-disc ml-5">
+                <li>
+                  <strong>Address completeness:</strong> Return the most
+                  complete address; show “approximate location” note on
+                  desktop/Wi-Fi and suggest manual entry if needed.
+                </li>
+                <li>
+                  <strong>Friendly deny flow:</strong> Clear message + “See how
+                  to enable it” modal (Chrome/Safari/Firefox/Opera).
+                </li>
+                <li>
+                  <strong>Denied → disabled:</strong> If permission is denied,
+                  disable Auto-detect until the user re-enables location
+                  <em>and refreshes</em>.
+                </li>
+                <li>
+                  <strong>Button logic:</strong> Get 3 Leads enables only with a
+                  valid address (manual or post re-enable).
+                </li>
+              </ul>
+            </div>
+            <div class="prose">
+              <h3 class="font-semibold">Verification</h3>
+              <ul class="list-disc ml-5">
+                <li>
+                  <strong>Allow:</strong> Auto-detect fills address; button
+                  enabled.
+                </li>
+                <li>
+                  <strong>Deny:</strong> Guidance modal shown; Auto-detect
+                  disabled; manual entry still works.
+                </li>
+                <li>
+                  <strong>Manual while denied:</strong> Valid address enables
+                  submission; Auto-detect remains disabled.
+                </li>
+                <li>
+                  <strong>Re-enable + refresh:</strong> Auto-detect active and
+                  accurate again.
+                </li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- FIX 3 -->
+      <section id="fix-3" class="scroll-mt-24">
+        <div class="bg-white rounded-xl shadow-sm border border-slate-200">
+          <div
+            class="p-5 border-b border-slate-200 flex items-center justify-between"
+          >
+            <h2 class="text-xl font-bold">🎨 Fix 3 — UI/UX</h2>
+            <span
+              class="badge bg-emerald-100 text-emerald-700 p-1.5 rounded-md text-sm"
+              >Fixed 3 issues</span
+            >
+          </div>
+          <div class="p-5 grid md:grid-cols-2 gap-6">
+            <div class="prose">
+              <h3 class="font-semibold">Issue Reported</h3>
+              <p>
+                Visiting
+                <code class="text-sm">https://staging.matchandfix.com/fix</code>
+                showed a blank page with a raw error and no way back home.
+              </p>
+              <h3 class="mt-4 font-semibold">What I Fixed</h3>
+              <ul class="list-disc ml-5">
+                <li>
+                  <strong>Navigation:</strong> <em>Start Matching</em> reliably
+                  routes to <code>/fix</code> with no blank screens.
+                </li>
+                <li>
+                  <strong>Dropdown:</strong> Added <em>Find Fixer</em> shortcut
+                  to return to the fix page from anywhere.
+                </li>
+                <li>
+                  <strong>Error page:</strong> Themed fallback page with clear
+                  messaging + “Go Home / Retry” actions.
+                </li>
+                <li>
+                  <strong>Consistency:</strong> Verified buttons/links across
+                  the flow.
+                </li>
+              </ul>
+            </div>
+            <div class="prose">
+              <h3 class="font-semibold">Verification</h3>
+              <ul class="list-disc ml-5">
+                <li>Start → Fix → Home round trips: ✅</li>
+                <li>Find Fixer dropdown loads <code>/fix</code>: ✅</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- FIX 4 -->
+      <section id="fix-4" class="scroll-mt-24">
+        <div class="bg-white rounded-xl shadow-sm border border-slate-200">
+          <div
+            class="p-5 border-b border-slate-200 flex items-center justify-between"
+          >
+            <h2 class="text-xl font-bold">
+              ⚡ Fix 4 — Performance & Stability
+            </h2>
+            <span
+              class="badge bg-emerald-100 text-emerald-700 p-1.5 rounded-md text-sm"
+              >Fixed 4 issues</span
+            >
+          </div>
+          <div class="p-5 grid md:grid-cols-2 gap-6">
+            <div class="prose">
+              <h3 class="font-semibold">Issue & Root Cause</h3>
+              <p>
+                Remote places (e.g., “Whitetop, VA 24292, USA”) felt slow on
+                first search due to upstream API latency.
+              </p>
+              <h3 class="mt-4 font-semibold">What I Changed</h3>
+              <ul class="list-disc ml-5">
+                <li>
+                  <strong>LRU cache:</strong> I store normalized queries in
+                  memory; the cache auto-evicts least-recent entries to keep
+                  memory bounded. Warm searches are instant (“CACHE HIT”).
+                </li>
+                <li>
+                  <strong>In-flight de-dupe:</strong> Collapses duplicate
+                  concurrent queries into one network call.
+                </li>
+                <li>
+                  <strong>Responsive UI:</strong> Inputs stay interactive; Get 3
+                  Leads gates on valid selection.
+                </li>
+              </ul>
+            </div>
+            <div class="prose">
+              <h3 class="font-semibold">Verification & Impact</h3>
+              <ul class="list-disc ml-5">
+                <li>Cold: one POST (~361ms) to Places; results returned.</li>
+                <li>Warm: served from cache; no extra network calls.</li>
+                <li>Rapid re-queries: single upstream call shared by all.</li>
+                <li>
+                  Outcome: faster repeats, fewer external calls, better
+                  perceived speed.
+                </li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Security -->
+      <section id="security" class="scroll-mt-24">
+        <div class="bg-white rounded-xl shadow-sm border border-slate-200">
+          <div
+            class="p-5 border-b border-slate-200 flex items-center justify-between"
+          >
+            <h2 class="text-xl font-bold">🔒 Security — Assurance</h2>
+            <span class="badge bg-blue-100 text-blue-700">Verified</span>
+          </div>
+          <div class="p-5 grid md:grid-cols-2 gap-6">
+            <div class="prose">
+              <h3 class="font-semibold">What I implemented</h3>
+              <ul class="list-disc ml-5">
+                <li>
+                  <strong
+                    >Server-side Places calls (Next.js Server Actions):</strong
+                  >
+                  API key in env; never sent to client.
+                </li>
+                <li>
+                  <strong>No sensitive logs:</strong> Keys/tokens scrubbed; only
+                  non-PII metadata logged.
+                </li>
+                <li>
+                  <strong>Minimal payloads:</strong> Client sends query +
+                  session token; server returns normalized suggestions.
+                </li>
+                <li>
+                  <strong>Defense-in-depth:</strong> Env-only keys, CORS
+                  restricted, memory-only caching.
+                </li>
+              </ul>
+            </div>
+            <div class="prose">
+              <h3 class="font-semibold">How I verified</h3>
+              <ul class="list-disc ml-5">
+                <li>
+                  DevTools Network: POST to <code>/fix</code> with small JSON
+                  body; responses show no credentials.
+                </li>
+                <li>
+                  No API key in headers/params/source; console has no secret
+                  data.
+                </li>
+                <li>
+                  Result: No client-side key exposure; reduced attack surface.
+                </li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Cross-Browser -->
+      <section id="cross-browser" class="scroll-mt-24">
+        <div class="bg-white rounded-xl shadow-sm border border-slate-200">
+          <div
+            class="p-5 border-b border-slate-200 flex items-center justify-between"
+          >
+            <h2 class="text-xl font-bold">🧪 Cross-Browser — Safari (Mac)</h2>
+            <span
+              class="badge bg-amber-100 text-amber-700 p-1.5 rounded-md text-sm"
+              >Action Required</span
+            >
+          </div>
+          <div class="p-5 grid md:grid-cols-2 gap-6">
+            <div class="prose">
+              <p>
+                <strong>Status:</strong> Satish tested on Safari (macOS) —
+                working on his friend MacBook.
+              </p>
+              <p>
+                <strong>Heads-up:</strong> Ahmed’s MacBook isn’t loading the
+                site. This looks device-specific; I’m investigating.
+              </p>
+              <div class="mt-4">
+                <video
+                  src="./video/satish-tested-on-his-friend-macbook.mp4"
+                  controls
+                  class="rounded-lg shadow border border-slate-200 w-full"
+                >
+                  Your browser does not support the video tag.
+                </video>
+              </div>
+            </div>
+            <div class="prose">
+              <h3 class="font-semibold">Info requested from Ahmed</h3>
+              <ul class="list-disc ml-5">
+                <li>macOS + Safari versions; exact URL visited</li>
+                <li>Screenshot or quick screen recording</li>
+                <li>Console/Network errors (⌥⌘I)</li>
+                <li>Whether Private Relay/VPN/Ad-blockers are on</li>
+                <li>Whether empty cache / private window helps</li>
+              </ul>
+              <h3 class="font-semibold mt-4">Likely suspects I’m checking</h3>
+              <ul class="list-disc ml-5">
+                <li>Stale service worker or DNS</li>
+                <li>ITP / cookie policies</li>
+                <li>Extensions / content blockers</li>
+                <li>HTTPS time drift / corporate proxy</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Footer -->
+      <section class="text-center text-sm text-slate-500">
+        <div class="mt-10">
+          Thanks for reviewing! — If anything looks off, I’ll adjust quickly.
+        </div>
+      </section>
+    </main>
+  </body>
+</html>
